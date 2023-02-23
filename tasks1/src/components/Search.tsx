@@ -9,11 +9,19 @@ const Search = ({ asyncRequest, setResults }: SearchProps) => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
+    let isIgnored = false;
     const fetchData = async () => {
       const response = await asyncRequest(searchText);
-      setResults(response);
+      if (!isIgnored) {
+        setResults(response);
+      }
     };
+
     fetchData();
+
+    return () => {
+      isIgnored = true;
+    };
   }, [searchText]);
 
   return (
