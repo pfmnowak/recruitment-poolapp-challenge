@@ -8,14 +8,18 @@ type Location = {
   name: string;
 };
 
+type Error = string | null;
+
 const Locations = () => {
   const [locations, setLocations] = useState<Locations>();
+  const [error, setError] = useState<Error>(null);
 
   return (
     <div>
       <Search
         asyncRequest={searchSpaces}
         setResults={(results) => setLocations(results.spaces)}
+        setError={setError}
       />
       {locations && locations.length > 0 && (
         <ul>
@@ -24,6 +28,8 @@ const Locations = () => {
           })}
         </ul>
       )}
+      {locations && locations.length === 0 && <div>No results found</div>}
+      {error && <div>{error}</div>}
     </div>
   );
 };

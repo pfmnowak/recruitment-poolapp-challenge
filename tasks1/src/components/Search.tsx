@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react";
 
+type Error = string | null;
+
 type SearchProps = {
   asyncRequest: (searchText: string) => {};
   setResults: ({}: any) => void;
+  setError: (errorMessage: Error) => void;
 };
 
-const Search = ({ asyncRequest, setResults }: SearchProps) => {
+const Search = ({ asyncRequest, setResults, setError }: SearchProps) => {
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     let isIgnored = false;
     const fetchData = async () => {
-      const response = await asyncRequest(searchText);
-      if (!isIgnored) {
-        setResults(response);
+      try {
+        const response = await asyncRequest(searchText);
+        console.log(response);
+        if (!isIgnored) {
+          setResults(response);
+          setError(null);
+        }
+      } catch (error) {
+        if (!isIgnored) {
+          setResults({});
+          setError("Something went wrong!");
+        }
       }
     };
-
     fetchData();
 
     return () => {
