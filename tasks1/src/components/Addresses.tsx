@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { searchAddress } from "../service/searchAddress";
 import Search from "./Search";
 
-type Addresses = Address[];
+type AddressesArray = Address[];
 
 type Address = {
   address: string;
@@ -12,7 +12,7 @@ type Address = {
 type Error = string | null;
 
 const Addresses = () => {
-  const [addressess, setAddressess] = useState<Addresses>();
+  const [addressess, setAddressess] = useState<AddressesArray>();
   const [error, setError] = useState<Error>(null);
 
   return (

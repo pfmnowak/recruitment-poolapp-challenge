@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { searchSpaces } from "../service/search";
 import Search from "./Search";
 
-type Locations = Location[];
+type LocationsArray = Location[];
 
 type Location = {
   name: string;
@@ -11,7 +11,7 @@ type Location = {
 type Error = string | null;
 
 const Locations = () => {
-  const [locations, setLocations] = useState<Locations>();
+  const [locations, setLocations] = useState<LocationsArray>();
   const [error, setError] = useState<Error>(null);
 
   return (
