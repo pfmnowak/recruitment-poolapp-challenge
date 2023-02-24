@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+const DEBOUNCE_MS = 500;
+
 type Error = string | null;
 
 type SearchProps = {
@@ -28,10 +30,13 @@ const Search = ({ asyncRequest, setResults, setError }: SearchProps) => {
         }
       }
     };
-    fetchData();
+    const timer = setTimeout(() => {
+      fetchData();
+    }, DEBOUNCE_MS);
 
     return () => {
       isIgnored = true;
+      clearTimeout(timer);
     };
   }, [searchText]);
 
