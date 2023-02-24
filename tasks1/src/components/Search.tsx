@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 type Error = string | null;
 
 type SearchProps = {
-  asyncRequest: (searchText: string) => {};
-  setResults: ({}: any) => void;
+  asyncRequest: (searchText: string) => Promise<any>;
+  setResults: (results: any) => void;
   setError: (errorMessage: Error) => void;
 };
 
@@ -16,7 +16,7 @@ const Search = ({ asyncRequest, setResults, setError }: SearchProps) => {
     const fetchData = async () => {
       try {
         const response = await asyncRequest(searchText);
-        console.log(response);
+
         if (!isIgnored) {
           setResults(response);
           setError(null);
