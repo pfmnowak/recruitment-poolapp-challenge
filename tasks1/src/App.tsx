@@ -1,14 +1,12 @@
 import React from "react";
 import "./App.css";
-import Addresses from "./components/Addresses";
-import Locations from "./components/Locations";
+import SimpleTabs from "./components/SimpleTabs";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Locations />
-        <Addresses />
+        <SimpleTabs />
       </header>
     </div>
   );
