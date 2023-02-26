@@ -1,7 +1,8 @@
-import Button from "@mui/material/Button";
+import EditLocationIcon from "@mui/icons-material/EditLocation";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
+import { StyledButton } from "../styles/StyledButton";
 import {
   StyledPanel,
   StyledPanelDetails,
@@ -12,7 +13,15 @@ const UserPanel = () => {
   return (
     <StyledPanel square={true}>
       <StyledPanelSummary
-        expandIcon={<Button variant="outlined">CHANGE</Button>}
+        expandIcon={
+          <StyledButton
+            variant="outlined"
+            disableRipple={true}
+            startIcon={<EditLocationIcon />}
+          >
+            CHANGE
+          </StyledButton>
+        }
         aria-controls="panel-content"
         id="panel-header"
       >
@@ -42,9 +51,14 @@ const UserPanel = () => {
           autoComplete="new-password"
           variant="standard"
         />
-        <Button type="submit" variant="text">
+        <StyledButton
+          type="submit"
+          variant="text"
+          disableRipple={true}
+          sx={{ mt: 3 }}
+        >
           SAVE
-        </Button>
+        </StyledButton>
       </StyledPanelDetails>
     </StyledPanel>
   );
