@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { searchAddress } from "../service/searchAddress";
-import Search from "./Search";
+import { searchAddress } from "../../service/searchAddress";
+import Search from "../Search";
 
 type AddressesArray = Address[];
 

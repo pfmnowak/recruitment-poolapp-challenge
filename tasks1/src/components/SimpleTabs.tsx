@@ -2,8 +2,9 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import React, { ReactNode, SyntheticEvent, useState } from "react";
-import Addresses from "./Addresses";
-import Locations from "./Locations";
+import Addresses from "./pages/Addresses";
+import Locations from "./pages/Locations";
+import PanelPage from "./pages/PanelPage";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -41,6 +42,7 @@ const SimpleTabs = () => {
           borderBottom: 1,
           borderColor: "divider",
           bgcolor: "black",
+          color: "white",
         }}
       >
         <Tabs
@@ -53,6 +55,7 @@ const SimpleTabs = () => {
         >
           <Tab label="Locations" />
           <Tab label="Addresses" />
+          <Tab label="MUI Panel" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -60,6 +63,9 @@ const SimpleTabs = () => {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Addresses />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <PanelPage />
       </TabPanel>
     </Box>
   );
