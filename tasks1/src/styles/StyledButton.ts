@@ -1,4 +1,4 @@
-import { styled } from "@mui/material";
+import { IconButton, styled } from "@mui/material";
 import Button from "@mui/material/Button";
 
 export const StyledButton = styled(Button)({
@@ -18,4 +18,8 @@ export const StyledButton = styled(Button)({
   "&.MuiButton-outlined": {
     border: "1px solid #FF7F00",
   },
+});
+
+export const StyledIconButton = styled(IconButton)({
+  color: "#FF7F00",
 });

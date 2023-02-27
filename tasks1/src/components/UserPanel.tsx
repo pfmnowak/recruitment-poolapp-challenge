@@ -1,8 +1,11 @@
 import EditLocationIcon from "@mui/icons-material/EditLocation";
-import TextField from "@mui/material/TextField";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { InputAdornment } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { StyledButton } from "../styles/StyledButton";
+import { StyledButton, StyledIconButton } from "../styles/StyledButton";
+import { StyledInput } from "../styles/StyledInput";
 import {
   StyledPanel,
   StyledPanelDetails,
@@ -10,6 +13,16 @@ import {
 } from "../styles/StyledPanel";
 
 const UserPanel = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
   return (
     <StyledPanel square={true}>
       <StyledPanelSummary
@@ -28,14 +41,14 @@ const UserPanel = () => {
         <Typography fontWeight="fontWeightBold">Personal data</Typography>
       </StyledPanelSummary>
       <StyledPanelDetails>
-        <TextField
+        <StyledInput
           id="standard-name-input"
           label="Name"
           placeholder="Enter your first name"
           autoComplete="given-name"
           variant="standard"
         />
-        <TextField
+        <StyledInput
           id="standard-email-input"
           label="Email"
           type="email"
@@ -43,13 +56,27 @@ const UserPanel = () => {
           autoComplete="email"
           variant="standard"
         />
-        <TextField
+        <StyledInput
           id="standard-password-input"
           label="Password"
-          type="password"
           placeholder="Enter a password"
           autoComplete="new-password"
           variant="standard"
+          type={showPassword ? "text" : "password"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <StyledIconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  disableRipple={true}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </StyledIconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <StyledButton
           type="submit"
