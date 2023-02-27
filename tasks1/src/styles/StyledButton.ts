@@ -1,8 +1,9 @@
 import { IconButton, styled } from "@mui/material";
 import Button from "@mui/material/Button";
+import { colorPrimary } from "./base";
 
 export const StyledButton = styled(Button)({
-  color: "#FF7F00",
+  color: colorPrimary,
   transition: "0.2s all",
 
   ":hover": {
@@ -16,10 +17,10 @@ export const StyledButton = styled(Button)({
   },
 
   "&.MuiButton-outlined": {
-    border: "1px solid #FF7F00",
+    border: `1px solid ${colorPrimary}`,
   },
 });
 
 export const StyledIconButton = styled(IconButton)({
-  color: "#FF7F00",
+  color: colorPrimary,
 });

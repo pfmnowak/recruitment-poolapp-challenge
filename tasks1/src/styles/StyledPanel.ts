@@ -2,9 +2,10 @@ import { styled } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { colorPrimaryLight } from "./base";
 
 export const StyledPanel = styled(Accordion)({
-  backgroundColor: "#FFF8F1",
+  backgroundColor: colorPrimaryLight,
   width: "100%",
   maxWidth: "29rem",
   padding: "0.5rem 0",
