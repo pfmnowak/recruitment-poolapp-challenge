@@ -1,28 +1,16 @@
 import EditLocationIcon from "@mui/icons-material/EditLocation";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { InputAdornment } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { StyledButton, StyledIconButton } from "../styles/StyledButton";
+import { StyledButton } from "../styles/StyledButton";
 import { StyledInput } from "../styles/StyledInput";
 import {
   StyledPanel,
   StyledPanelDetails,
   StyledPanelSummary,
 } from "../styles/StyledPanel";
+import PasswordInput from "./PasswordInput";
 
 const UserPanel = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
   return (
     <StyledPanel square={true}>
       <StyledPanelSummary
@@ -56,28 +44,7 @@ const UserPanel = () => {
           autoComplete="email"
           variant="standard"
         />
-        <StyledInput
-          id="standard-password-input"
-          label="Password"
-          placeholder="Enter a password"
-          autoComplete="new-password"
-          variant="standard"
-          type={showPassword ? "text" : "password"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <StyledIconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  disableRipple={true}
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </StyledIconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
+        <PasswordInput />
         <StyledButton
           type="submit"
           variant="text"
