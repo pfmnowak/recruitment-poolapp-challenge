@@ -3,6 +3,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import React, { ReactNode, SyntheticEvent, useState } from "react";
 import Addresses from "./pages/Addresses";
+import JsonComparator from "./pages/JsonComparator";
 import Locations from "./pages/Locations";
 import PanelPage from "./pages/PanelPage";
 
@@ -56,6 +57,7 @@ const SimpleTabs = () => {
           <Tab label="Locations" />
           <Tab label="Addresses" />
           <Tab label="MUI Panel" />
+          <Tab label="Jsons" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -66,6 +68,9 @@ const SimpleTabs = () => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <PanelPage />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <JsonComparator />
       </TabPanel>
     </Box>
   );
