@@ -14,7 +14,10 @@ export const compareObjectsKeys = (object1: {}, object2: {}) => {
 
 const getMissingKeys = (object1Keys: ObjectKeys, object2Keys: ObjectKeys) => {
   object2Keys.forEach((keyOfObject2) => {
-    object1Keys.splice(object1Keys.indexOf(keyOfObject2), 1);
+    const index = object1Keys.indexOf(keyOfObject2);
+    if (index >= 0) {
+      object1Keys.splice(index, 1);
+    }
   });
   return object1Keys;
 };
