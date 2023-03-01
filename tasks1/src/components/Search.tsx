@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Error } from "../types/types";
 
 const DEBOUNCE_MS = 500;
-
-type Error = string | null;
 
 type SearchProps = {
   asyncRequest: (searchText: string) => Promise<any>;

@@ -1,6 +1,8 @@
+import { ObjectKeys } from "../types/types";
+
 export const getAllObjectKeys = (
   object: any,
-  arrayWithKeys: string[],
+  arrayWithKeys: ObjectKeys,
   keyPath: string
 ) => {
   Object.keys(object).forEach(function (key) {

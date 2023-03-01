@@ -1,12 +1,8 @@
 import { random, range } from "lodash";
+import { Address } from "../types/types";
 
 type Results = {
   addresses: Address[];
-};
-
-type Address = {
-  address: string;
-  country: string;
 };
 
 const generateAdresses =

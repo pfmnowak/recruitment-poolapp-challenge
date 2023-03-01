@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { searchSpaces } from "../../service/search";
+import { Error, LocationsArray } from "../../types/types";
 import Search from "../Search";
-
-type LocationsArray = Location[];
-
-type Location = {
-  name: string;
-};
-
-type Error = string | null;
 
 const Locations = () => {
   const [locations, setLocations] = useState<LocationsArray>();

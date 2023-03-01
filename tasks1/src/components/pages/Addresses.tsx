@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import { searchAddress } from "../../service/searchAddress";
+import { AddressesArray, Error } from "../../types/types";
 import Search from "../Search";
-
-type AddressesArray = Address[];
-
-type Address = {
-  address: string;
-  country: string;
-};
-
-type Error = string | null;
 
 const Addresses = () => {
   const [addressess, setAddressess] = useState<AddressesArray>();

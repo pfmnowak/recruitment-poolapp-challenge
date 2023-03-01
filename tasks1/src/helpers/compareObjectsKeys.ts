@@ -1,8 +1,9 @@
+import { ObjectKeys } from "./../types/types";
 import { getAllObjectKeys } from "./getAllObjectKeys";
 
 export const compareObjectsKeys = (object1: {}, object2: {}) => {
-  const object1Keys: string[] = [];
-  const object2Keys: string[] = [];
+  const object1Keys: ObjectKeys = [];
+  const object2Keys: ObjectKeys = [];
   getAllObjectKeys(object1, object1Keys, "");
   getAllObjectKeys(object2, object2Keys, "");
 
@@ -11,12 +12,12 @@ export const compareObjectsKeys = (object1: {}, object2: {}) => {
   return removeLeadingDots(missingKeys);
 };
 
-const getMissingKeys = (object1Keys: string[], object2Keys: string[]) => {
+const getMissingKeys = (object1Keys: ObjectKeys, object2Keys: ObjectKeys) => {
   object2Keys.forEach((keyOfObject2) => {
     object1Keys.splice(object1Keys.indexOf(keyOfObject2), 1);
   });
   return object1Keys;
 };
 
-const removeLeadingDots = (objectKeys: string[]) =>
+const removeLeadingDots = (objectKeys: ObjectKeys) =>
   objectKeys.map((key) => key.replace(".", ""));
