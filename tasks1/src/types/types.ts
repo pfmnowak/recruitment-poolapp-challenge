@@ -18,3 +18,8 @@ export type JsonForm = {
 };
 
 export type ObjectKeys = string[];
+
+export type Diffs = {
+  name: string;
+  diff: Set<string>;
+}[];

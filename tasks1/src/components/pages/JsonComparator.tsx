@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import { deepClone } from "../../helpers/clone";
 import { generateDiffs } from "../../helpers/generateDiffs";
 import { parseJsonsFromInputFields } from "../../helpers/parseJsonsFromInputFields";
-import { JsonForm, JsonForms } from "../../types/types";
+import { Diffs, JsonForm, JsonForms } from "../../types/types";
+import JsonDiff from "../JsonDiff";
 
 const JsonComparator = () => {
   const [inputFields, setInputFields] = useState<JsonForms>([]);
+  const [diffs, setDiffs] = useState<Diffs>([]);
 
   const handleCompareButtonClick = () => {
     const inputFieldsCopy: JsonForms = deepClone(inputFields);
     let parsedInputFields = parseJsonsFromInputFields(inputFieldsCopy);
 
     const diffs = generateDiffs(parsedInputFields);
-
-    // setState with diffs
-    console.log(diffs);
+    setDiffs(diffs);
   };
 
   const handleAddButtonClick = () => {
@@ -69,18 +69,20 @@ const JsonComparator = () => {
   };
 
   return (
-    <div>
-      <h1>JSON Comparator</h1>
+    <Box sx={{ backgroundColor: "#f7f7f7", p: 3 }}>
+      <h3>JSON Comparator</h3>
       <Box display={"flex"} justifyContent={"center"} overflow-x={"auto"}>
         {createInputs()}
       </Box>
       <Button variant="contained" onClick={handleAddButtonClick}>
         Add JSON
       </Button>
+      <br />
       <Button variant="contained" onClick={handleCompareButtonClick}>
         Compare
       </Button>
-    </div>
+      <JsonDiff diffs={diffs} />
+    </Box>
   );
 };
 
