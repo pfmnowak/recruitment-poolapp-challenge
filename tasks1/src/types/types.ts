@@ -23,3 +23,7 @@ export type Diffs = {
   name: string;
   diff: Set<string>;
 }[];
+
+export type InputChangeEvent = React.ChangeEvent<
+  HTMLInputElement | HTMLTextAreaElement
+>;

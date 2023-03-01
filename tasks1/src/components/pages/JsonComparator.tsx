@@ -1,10 +1,17 @@
-import { Box, Button, TextField } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { deepClone } from "../../helpers/clone";
 import { generateDiffs } from "../../helpers/generateDiffs";
 import { parseJsonsFromInputFields } from "../../helpers/parseJsonsFromInputFields";
-import { Diffs, JsonForm, JsonForms } from "../../types/types";
+import {
+  Diffs,
+  InputChangeEvent,
+  JsonForm,
+  JsonForms,
+} from "../../types/types";
 import JsonDiff from "../JsonDiff";
+import NewJsonForm from "../NewJsonForm";
 
 const JsonComparator = () => {
   const [inputFields, setInputFields] = useState<JsonForms>([]);
@@ -26,44 +33,22 @@ const JsonComparator = () => {
     setInputFields((prevInputFields) => [...prevInputFields, newfield]);
   };
 
-  const handleFormChange = (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleFormChange = (index: number, event: InputChangeEvent) => {
     let data = [...inputFields];
     const inputValueKey = event.target.name as keyof JsonForm;
     data[index][inputValueKey] = event.target.value;
     setInputFields(data);
   };
 
-  const createInputs = () => {
+  const createJsonForms = () => {
     return inputFields.map((input, index) => {
       return (
-        <Box key={index}>
-          <TextField
-            id={`json-name-${index + 1}`}
-            name="name"
-            label={`JSON ${index + 1} name`}
-            placeholder="Enter a name for this JSON"
-            hiddenLabel={true}
-            InputLabelProps={{ shrink: true }}
-            value={input.name}
-            onChange={(event) => handleFormChange(index, event)}
-          />
-          <br />
-          <br />
-          <TextField
-            id={`json-content-${index + 1}`}
-            name="content"
-            label={`JSON ${index + 1} content`}
-            placeholder="Enter your JSON here"
-            multiline
-            minRows={4}
-            InputLabelProps={{ shrink: true }}
-            value={input.content}
-            onChange={(event) => handleFormChange(index, event)}
-          />
-        </Box>
+        <NewJsonForm
+          key={index}
+          index={index}
+          values={input}
+          onChange={handleFormChange}
+        />
       );
     });
   };
@@ -71,17 +56,36 @@ const JsonComparator = () => {
   return (
     <Box sx={{ backgroundColor: "#f7f7f7", p: 3 }}>
       <h3>JSON Comparator</h3>
-      <Box display={"flex"} justifyContent={"center"} overflow-x={"auto"}>
-        {createInputs()}
+      <Box
+        display={"flex"}
+        justifyContent={"space-evenly"}
+        alignItems={"start"}
+      >
+        <Box flex={1} display={"flex"} flexDirection={"column"}>
+          {createJsonForms()}
+        </Box>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          height={150}
+          width={150}
+          margin={"0rem 5rem"}
+          justifyContent={"space-around"}
+        >
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handleAddButtonClick}
+            startIcon={<AddIcon />}
+          >
+            Add JSON
+          </Button>
+          <Button variant="contained" onClick={handleCompareButtonClick}>
+            Compare
+          </Button>
+        </Box>
+        <JsonDiff diffs={diffs} />
       </Box>
-      <Button variant="contained" onClick={handleAddButtonClick}>
-        Add JSON
-      </Button>
-      <br />
-      <Button variant="contained" onClick={handleCompareButtonClick}>
-        Compare
-      </Button>
-      <JsonDiff diffs={diffs} />
     </Box>
   );
 };
