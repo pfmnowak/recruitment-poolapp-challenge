@@ -1,9 +1,8 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
-import { deepClone } from "../../helpers/clone";
 import { generateDiffs } from "../../helpers/generateDiffs";
-import { parseJsonsFromInputFields } from "../../helpers/parseJsonsFromInputFields";
+import { deepClone } from "../../helpers/objectHelpers";
 import {
   Diffs,
   InputChangeEvent,
@@ -38,6 +37,16 @@ const JsonComparator = () => {
     const inputValueKey = event.target.name as keyof JsonForm;
     data[index][inputValueKey] = event.target.value;
     setInputFields(data);
+  };
+
+  const parseJsonsFromInputFields = (inputFields: JsonForms) => {
+    return inputFields.map((input) => {
+      const parsedContent = JSON.parse(input.content);
+      return {
+        name: input.name,
+        content: parsedContent,
+      };
+    });
   };
 
   const createJsonForms = () => {

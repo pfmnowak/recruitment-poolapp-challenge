@@ -1,6 +1,5 @@
-import { JsonForms } from "./../types/types";
-import { deepClone } from "./clone";
-import { compareObjectsKeys } from "./compareObjectsKeys";
+import { JsonForms, ObjectKeys } from "./../types/types";
+import { deepClone, isObject } from "./objectHelpers";
 
 export const generateDiffs = (inputFields: JsonForms) => {
   return inputFields.map((input, index) => {
@@ -19,3 +18,44 @@ export const generateDiffs = (inputFields: JsonForms) => {
     };
   });
 };
+
+const compareObjectsKeys = (object1: {}, object2: {}) => {
+  const object1Keys: ObjectKeys = getAllKeys(object1);
+  const object2Keys: ObjectKeys = getAllKeys(object2);
+
+  const missingKeys = getMissingKeys(object1Keys, object2Keys);
+
+  return removeLeadingDots(missingKeys);
+};
+
+const getAllKeys = (object: any, keyPath: string = "") => {
+  const nestedKeys = Object.keys(object).map((key) => {
+    let keys: ObjectKeys = [];
+    const newKey = `${keyPath}.${key}`;
+    if (isObject(object[key])) {
+      keys = getAllKeys(object[key], newKey);
+    } else if (Array.isArray(object[key])) {
+      object[key].forEach((value: any) => {
+        if (Array.isArray(value) || isObject(value)) {
+          keys = getAllKeys(value, newKey);
+        }
+      });
+    }
+    keys.push(newKey);
+    return [...keys];
+  });
+  return nestedKeys.flat();
+};
+
+const getMissingKeys = (object1Keys: ObjectKeys, object2Keys: ObjectKeys) => {
+  object2Keys.forEach((keyOfObject2) => {
+    const index = object1Keys.indexOf(keyOfObject2);
+    if (index >= 0) {
+      object1Keys.splice(index, 1);
+    }
+  });
+  return object1Keys;
+};
+
+const removeLeadingDots = (objectKeys: ObjectKeys) =>
+  objectKeys.map((key) => key.replace(".", ""));
