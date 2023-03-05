@@ -27,7 +27,7 @@ const MAX_TIME_MILLIS = 1000;
 const searchAddress = (searchText: string): Promise<Results> => {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      if (random() > CHANCE_OF_FAILURE) {
+      if (random(true) > CHANCE_OF_FAILURE) {
         const addresses = ALL_ADDRESSES.filter(
           ({ address }) => address.indexOf(searchText) !== -1
         );

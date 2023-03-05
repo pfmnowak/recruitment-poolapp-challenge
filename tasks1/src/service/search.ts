@@ -32,7 +32,7 @@ const MAX_TIME_MILLIS = 1000;
 const searchSpaces = (searchText: string): Promise<Results> => {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      if (random() > CHANCE_OF_FAILURE) {
+      if (random(true) > CHANCE_OF_FAILURE) {
         const spaces = ALL_PARKING_SPACES.filter(
           ({ name }) => name.indexOf(searchText) !== -1
         );

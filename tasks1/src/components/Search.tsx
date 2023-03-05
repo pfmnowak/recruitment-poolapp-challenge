@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import delay from "../helpers/delay";
 import { Error } from "../types/types";
 
 const DEBOUNCE_MS = 500;
@@ -16,7 +17,7 @@ const Search = ({ asyncRequest, setResults, setError }: SearchProps) => {
     let isIgnored = false;
     const fetchData = async () => {
       try {
-        const response = await asyncRequest(searchText);
+        const response = await asyncRequest(searchText).then(await delay(200));
 
         if (!isIgnored) {
           setResults(response);
