@@ -40,8 +40,9 @@ const getAllKeys = (object: any, keyPath: string = "") => {
           keys = getAllKeys(value, newKey);
         }
       });
+    } else {
+      keys.push(newKey);
     }
-    keys.push(newKey);
     return [...keys];
   });
   return nestedKeys.flat();
